@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html> 
+              
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <style>
+            table,tr,th{
+                border:2px solid black
+            }
+            th{
+                height: 50px;
+                width:50px;
+                text-align: center;
+                font-style: initial;
+                
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="container">  
+        <div class="jumbotron">
+            <h1 id="h1"> Let's Play ! </h1>
+            <button onclick="restart()" type="button" class="btn btn-primary">Restart</button>
+        </div>
+        <div style="margin-left : 30% " class="board">
+            <table    style="height: 50%; width: 50%;">
+                <tr class="row1" > 
+                    
+                    <th class="col1"  onclick="Change(id)"  id="0">&nbsp;</th>
+                    <th class="col2" onclick="Change(id)"  id="1">&nbsp;</th>
+                    <th class="col3"  onclick="Change(id)"  id="2">&nbsp;</th>
+                
+                 </tr>
+                 <tr  class ="row2"> 
+                    <th class="col1" onclick="Change(id)" id="3">&nbsp;</th>
+                    <th class="col2" onclick="Change(id)" id="4">&nbsp;</th>
+                    <th class="col3"  onclick="Change(id)" id="5">&nbsp;</th>
+                 </tr>
+                 <tr class="row3"> 
+                    <th class="col1"  onclick="Change(id)" id="6">&nbsp;</th>
+                    <th class="col2" onclick="Change(id)"  id="7">&nbsp;</th>
+                    <th class="col3"  onclick="Change(id)"  id="8">&nbsp;</th>
+                 </tr>
+
+            </table>
+            <button type="button" onclick="DecideWinnerText() " class="btn btn-success">Ok</button> <br>
+            <h2 id="resultHeader"></h2>
+        </div>
+        <br> <br> <br> <br>
+        <p> <em>Developed By Rezaul Karim <br> Dept of CSE, University of Chittagong </em> </p>
+    </div>
+    <script> 
+        //console.log(document.getElementById("c1"))
+
+        /*function ClearText (id) {
+
+            document.getElementById(id).innerHTML="&nbsp;"
+        } */
+    function restart() {
+
+        
+        location.reload()
+
+    }
+    function Change(id){
+
+        a=document.getElementById(id)
+        if (a.innerHTML =="&nbsp;")
+         {
+             a.innerHTML ="X";
+         }
+         else if (a.innerHTML =="X"){
+             a.innerHTML ="O"
+         }
+         else if (a.innerHTML ="O"){
+             a.innerHTML ="&nbsp;";
+         }
+         
+
+    }
+   function DecideWinnerText() {
+        var row1=[document.getElementById("0").innerText ,document.getElementById("1").innerText,document.getElementById("2").innerText ]
+         var row2=[document.getElementById("3").innerText ,document.getElementById("4").innerText,document.getElementById("5").innerText ]
+         var row3=[document.getElementById("6").innerText ,document.getElementById("7").innerText,document.getElementById("8").innerText ]
+         var col1=[document.getElementById("0").innerText,document.getElementById("3").innerText ,document.getElementById("6").innerText ]
+         var col2=[document.getElementById("1").innerText ,document.getElementById("4").innerText ,document.getElementById("7").innerText ]
+         var col3=[document.getElementById("2").innerText ,document.getElementById("5").innerText ,document.getElementById("8").innerText ]
+         var leftCorner=[document.getElementById("0").innerText ,document.getElementById("4").innerText ,document.getElementById("8").innerText ]
+         var rightCorner=[document.getElementById("2").innerText ,document.getElementById  ( "4").innerText,document.getElementById("6").innerText ]
+
+         
+         if(Checked(row1)){
+            var winnerText = row1[0]
+           
+            var d=document.getElementsByClassName("row1");
+            for (var f=0;f<d.length;f++){
+                d[f].style.backgroundColor="green"
+            }
+            
+                
+             document.querySelector("#resultHeader").innerText=winnerText+" Wins";
+        
+         }
+         else if(Checked(row2)){
+           
+
+            var winnerText =row2[0]
+            var d=document.getElementsByClassName("row2");
+            for (var f=0;f<d.length;f++){
+                d[f].style.backgroundColor="green"
+            }
+            document.querySelector("#resultHeader").innerText=winnerText+" Wins";
+         }
+        else if(Checked(row3)){
+          /*  var d=document.getElementsByClassName("row3");
+            for (var f in d){
+                d[f].style.backgroundColor="green"
+            }*/
+
+            var winnerText = row3[0]
+            var d=document.getElementsByClassName("row3");
+            for (var f=0;f<d.length;f++){
+                d[f].style.backgroundColor="green"
+            }
+            document.querySelector("#resultHeader").innerText=winnerText+" Wins";
+         }
+         else if(Checked(col1)){
+            var winnerText = col1[0]
+            var d=document.getElementsByClassName("col1");
+            for (var f=0;f<d.length;f++){
+                d[f].style.backgroundColor="green"
+            }
+
+            document.querySelector("#resultHeader").innerText=winnerText+" Wins";
+         }
+         else if(Checked(col2)){
+            var winnerText = col2[0]
+            var d=document.getElementsByClassName("col2");
+            for (var f=0;f<d.length;f++){
+                d[f].style.backgroundColor="green"
+            }
+            document.querySelector("#resultHeader").innerText=winnerText+" Wins";
+         }
+        else if(Checked(col3)){
+            var winnerText = col3[0]
+            var d=document.getElementsByClassName("col3");
+            for (var f=0;f<d.length;f++){
+                d[f].style.backgroundColor="green"
+            }
+            document.querySelector("#resultHeader").innerText=winnerText+" Wins";
+         }
+         else if(Checked(leftCorner)){
+            var winnerText = leftCorner[0]
+            document.getElementById("0").style.backgroundColor="green"
+            document.getElementById("4").style.backgroundColor="green"
+            document.getElementById("8").style.backgroundColor="green"
+
+            document.querySelector("#resultHeader").innerText=winnerText+" Wins";
+         }
+        else if(Checked(rightCorner)){
+            var winnerText =rightCorner[0]
+            document.getElementById("2").style.backgroundColor="green"
+            document.getElementById("4").style.backgroundColor="green"
+            document.getElementById("6").style.backgroundColor="green"
+            document.querySelector("#resultHeader").innerText=winnerText+" Wins";
+         }
+
+
+         
+    
+    }
+    function Checked(x){
+        
+        if (x[0].trim()=="" && x[1].trim()=="" && x[2].trim()=="") {
+            return false;
+        }
+        var txt=1;
+         for(var f=1;f<x.length;f++){
+            
+             if (x[f]==x[f-1]) { 
+                 txt+=1;
+             }
+         }
+         if (txt==3){
+             return true
+         }
+         return false
+    }
+
+    
+
+        
+    </script>
+    </body>
+    </html>
